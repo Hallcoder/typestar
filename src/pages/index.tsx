@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import Typewriter from 'typewriter-effect';
 import { useRouter } from 'next/router';
+import Button from '@/components/common/button';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -29,7 +30,7 @@ export default function Home() {
 /></h2>
     </div>
             <img src="./favicon.png" alt="" />
-            <h3 className='text-[60px] cursor-pointer m-2'>&rarr;</h3>
+           <Button clickHandler={() => router.push('/home')}>&rarr;</Button>
     </main>
   )
 }
