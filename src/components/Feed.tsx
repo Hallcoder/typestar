@@ -6,5 +6,8 @@ export default function Feed(){
         <FeedComponent/>
         <FeedComponent/>
         <FeedComponent/>
+        <FeedComponent/>
+        <FeedComponent/>
+        <FeedComponent/>
     </div>
 }
