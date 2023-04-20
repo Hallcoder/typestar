@@ -4,11 +4,13 @@ import Head from 'next/head'
 import Typewriter from 'typewriter-effect';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/button';
+import React from 'react';
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter();
   return (
+    <React.StrictMode>
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
     <Head>
       <title>TypeStar ~ The fastest and enjoyable typing race and game</title>
@@ -32,5 +34,6 @@ export default function Home() {
             <img src="./favicon.png" alt="" />
            <Button clickHandler={() => router.push('/home')}>&rarr;</Button>
     </main>
+    </React.StrictMode>
   )
 }

@@ -1,17 +1,32 @@
-class Queue{
-    front:string;
-    rear:string;
-    constructor(f: string,r: string){
-        this.front =f;
-        this.rear = r; 
+//FIFO
+export default class Queue{
+    front:number;
+    rear:number;
+    elements:string[] = [];
+    constructor(){
+        this.front =-1;
+        this.rear = 0; 
     }
-    push(){
-
+    push(l){
+    if(this.isEmpty()){
+        this.front++;
+        this.elements[this.rear] = l;
+        this.rear++;
+        console.log('Queue was empty',this.front);
+        return;
     }
-    pop(){
-
+     this.elements[this.rear++] = l ;
     }
-    top(){
-
+    pop():string{
+        if(this.isEmpty()) return 'undefined';
+        this.front--;
+    return this.elements.pop()!;
     }
+    top():string{
+    if(this.isEmpty()) return 'undefined';
+    return this.elements[this.front];
+    }
+   isEmpty():boolean{
+     return (this.front == -1);
+   }
 }
