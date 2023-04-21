@@ -968,6 +968,11 @@
     "is-date-object" "^1.0.1"
     "is-symbol" "^1.0.2"
 
+"es6-object-assign@^1.1.0":
+  "integrity" "sha512-MEl9uirslVwqQU369iHNWZXsI8yaZYGg/D65aOgZkeyFJwHYSxilf7rQzXKI7DdDuBPrBXbfk3sl9hJhmd5AUw=="
+  "resolved" "https://registry.npmjs.org/es6-object-assign/-/es6-object-assign-1.1.0.tgz"
+  "version" "1.1.0"
+
 "escalade@^3.1.1":
   "integrity" "sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw=="
   "resolved" "https://registry.npmjs.org/escalade/-/escalade-3.1.1.tgz"
@@ -2169,6 +2174,11 @@
   "resolved" "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   "version" "1.2.1"
 
+"promise-polyfill@^6.0.2":
+  "integrity" "sha512-g0LWaH0gFsxovsU7R5LrrhHhWAWiHRnh1GPrhXnPgYsDkIqjRYUYSZEsej/wtleDrz5xVSIDbeKfidztp2XHFQ=="
+  "resolved" "https://registry.npmjs.org/promise-polyfill/-/promise-polyfill-6.1.0.tgz"
+  "version" "6.1.0"
+
 "prop-types-exact@^1.2.0":
   "integrity" "sha512-K+Tk3Kd9V0odiXFP9fwDHUYRyvK3Nun3GVyPapSIs5OBkITAm15W0CPFD/YKTkMUAbc0b9CUwRQp2ybiBIq+eA=="
   "resolved" "https://registry.npmjs.org/prop-types-exact/-/prop-types-exact-1.2.0.tgz"
@@ -2527,6 +2537,14 @@
   "integrity" "sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w=="
   "resolved" "https://registry.npmjs.org/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
   "version" "1.0.0"
+
+"sweetalert@^2.1.2":
+  "integrity" "sha512-iWx7X4anRBNDa/a+AdTmvAzQtkN1+s4j/JJRWlHpYE8Qimkohs8/XnFcWeYHH2lMA8LRCa5tj2d244If3S/hzA=="
+  "resolved" "https://registry.npmjs.org/sweetalert/-/sweetalert-2.1.2.tgz"
+  "version" "2.1.2"
+  dependencies:
+    "es6-object-assign" "^1.1.0"
+    "promise-polyfill" "^6.0.2"
 
 "synckit@^0.8.5":
   "integrity" "sha512-L1dapNV6vu2s/4Sputv8xGsCdAVlb5nRDMFU/E27D44l5U6cw1g0dGd45uLc+OXjNMmF4ntiMdCimzcjFKQI8Q=="

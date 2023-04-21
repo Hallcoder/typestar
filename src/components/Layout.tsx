@@ -4,7 +4,7 @@ interface Props{
     children:any[]
 }
 const Layout:React.FC<Props> = ({children}) => {
-   return <main className="flex-col  h-full min-h-screen">
+   return <main className="flex-col relative  h-full min-h-screen">
     <Navbar />
     {children}
    </main>
