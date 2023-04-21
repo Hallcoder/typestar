@@ -18,15 +18,7 @@ export default function Race(){
     const [wpm,setWpm] = useState<number>(56);
     const [accuracy,setAccuracy] = useState<number>(43);
     const [show,setShow] = useState<boolean>(false);
-    var tempText:string[];
     useEffect(() => {
-        // tempText = [];
-        // let i = 0;
-        // while(i < textToWrite.length){
-        //     tempText.push(textToWrite[i]);
-        //     i++;
-        // }
-        // setText(tempText)
         toast('Make sure to click on the paragraph before writing and you will see the border changing meaning now you can Start!',
         {style: {
             borderRadius: '10px',
