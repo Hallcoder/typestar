@@ -7,6 +7,7 @@ import Button from "@/components/common/button";
 import swal from 'sweetalert'
 import Modal from "@/components/modal";
 import generateText from "@/utils/generateText";
+import Timer from "@/components/timer";
 
 export default function Race(){
     const textToWrite:any = `Lorem ipsum dolor sit amet consectetur .`;
@@ -18,26 +19,28 @@ export default function Race(){
     const [wpm,setWpm] = useState<number>(56);
     const [accuracy,setAccuracy] = useState<number>(43);
     const [show,setShow] = useState<boolean>(false);
+    const inputRef = useRef<HTMLInputElement>(null);
+    const [focused,setFocus] = useState(false);
+    const [startRace,setStartRace] = useState(false);
+    const [keyPressed,setKeyPressed] = useState("");
     useEffect(() => {
+        setStartRace(true)
         toast('Make sure to click on the paragraph before writing and you will see the border changing meaning now you can Start!',
         {style: {
             borderRadius: '10px',
             background: '#333',
             color: '#fff',
-     },duration:500 }
-     ,);
-     generateText().then(data => {        
-        setText(data.data)});     
+        },duration:500 }
+        ,);
+        toast.success('The race is about to start right after this toast disappears',{duration:3000})  
     }, []);
-
-    const inputRef = useRef<HTMLInputElement>(null);
-    const [focused,setFocus] = useState(false);
-    const [keyPressed,setKeyPressed] = useState("");
+    useEffect(() => {
+        generateText().then(data => {        
+            setText(data.data)});  
+    },[show])
     const handleChange = (e) => {        
-       if(e.target.value == text){
-        console.log('equal fuly');
-        inputRef.current!.blur();
-        setShow(true);
+       if(e.target.value.length == text.length){
+         stopRace();
        }
        setInputValue(e.target.value);
        setWritten(e.target.value);
@@ -54,21 +57,24 @@ export default function Race(){
           },200)  
     }
     const stopRace = () => {
-
+        inputRef.current!.blur();
+        //TODO: calculate wpm and accuracy
+        setShow(true);
+        setStartRace(false);
     }
     const restartRace = () => {
 
     }
     return <Layout >
-        <div><Toaster></Toaster></div>
-        <span className="flex justify-end w-9/12 m-auto">3:00</span>
+        <Toaster></Toaster>
+        <span className="flex justify-end w-9/12 m-auto"><Timer stopRace={stopRace} start={startRace}></Timer></span>
         <OutsideClickHandler
         onOutsideClick= {() => {
             setFocus(false);
         }}>
         <div className="w-8/12  m-auto" >
        <p className={!focused ? 'text-center border w-full m-auto text-3xl':"text-center border w-full m-auto text-3xl border-2 border-blue-300"} onClick={focus}>
-      {text.length == 0 ? 'Loading':text.split('').map((t,i) => {
+      {text.length == 0 ? 'Loading...':text.split('').map((t,i) => {
         if(i < written.length){
             return <span key={i} className={written[i] == t ? writtenTextClass : invalidCharacterClass}>{t}</span>
         }
