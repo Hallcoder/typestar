@@ -23,8 +23,10 @@ export default function Race(){
     const [focused,setFocus] = useState(false);
     const [startRace,setStartRace] = useState(false);
     const [keyPressed,setKeyPressed] = useState("");
+    const [timeTaken, setTimeTaken] = useState<number>();
+    const [getTime, setGetTime] = useState<boolean>(false)
     useEffect(() => {
-        setStartRace(true)
+        
         toast('Make sure to click on the paragraph before writing and you will see the border changing meaning now you can Start!',
         {style: {
             borderRadius: '10px',
@@ -34,12 +36,16 @@ export default function Race(){
         ,);
         toast.success('The race is about to start right after this toast disappears',{duration:3000})  
     }, []);
+    // useEffect(() => {
+    //     setStartRace(true)
+    // },[text])
     useEffect(() => {
         generateText().then(data => {        
             setText(data.data)});  
     },[show])
     const handleChange = (e) => {        
        if(e.target.value.length == text.length){
+        setGetTime(true);
          stopRace();
        }
        setInputValue(e.target.value);
@@ -48,26 +54,39 @@ export default function Race(){
  
     const keyPressHandler = async(e:any) => {
         setKeyPressed(e.key);  
+        setTimeout(() => {
+          setKeyPressed(prev => "")
+        },200)  
     }
     const focus = () => {
           inputRef.current?.focus();
+          setStartRace(true);
           setFocus(true); 
-          setTimeout(() => {
-            setKeyPressed(prev => "")
-          },200)  
+          
     }
-    const stopRace = () => {
+    
+    const calculateWPM = () => {
+        console.log(typeof written)
+        let wordsTyped = (written as unknown as string).split(" ").length;
+        console.log(wordsTyped)
+        console.log(timeTaken)
+        let wpm = (wordsTyped/timeTaken!)/5;
+        setWpm(wpm);
+    }
+    const stopRace = (timeTaken?:number) => {
         inputRef.current!.blur();
         //TODO: calculate wpm and accuracy
         setShow(true);
-        setStartRace(false);
+        setTimeTaken(timeTaken??60);
+        // setStartRace(false);
+        // calculateWPM();
     }
     const restartRace = () => {
 
     }
     return <Layout >
         <Toaster></Toaster>
-        <span className="flex justify-end w-9/12 m-auto"><Timer stopRace={stopRace} start={startRace}></Timer></span>
+        <span className="flex justify-end w-9/12 m-auto"><Timer timeTaken={setTimeTaken} getTime={getTime} stopRace={stopRace} start={startRace}></Timer></span>
         <OutsideClickHandler
         onOutsideClick= {() => {
             setFocus(false);
@@ -95,6 +114,7 @@ export default function Race(){
     setInputValue('')
     setWritten([])
     setShow(false)
+    setStartRace(false)
     }}><Modal wpm={wpm} accuracy={accuracy} /></OutsideClickHandler>}
     </Layout>
 }
