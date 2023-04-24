@@ -19,7 +19,7 @@ export default function Timer({start,stopRace,timeTaken, getTime}){
                 if(minutes == 0) {
                     let diff = 175 - ((minutes*60)+seconds);
                     stopRace(diff/60);
-                    setMinutes(3)
+                    reset();
                 };   
             }
         },1000);
@@ -39,9 +39,9 @@ export default function Timer({start,stopRace,timeTaken, getTime}){
     },[start])
     useEffect(() => {
         let diff = 175 - ((minutes*60)+seconds);
-        
         if(getTime){
             timeTaken(diff/60);
+            reset();
         }
     },[getTime])
     // useEffect(() => {

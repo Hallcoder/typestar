@@ -5,6 +5,7 @@ import Typewriter from 'typewriter-effect';
 import { useRouter } from 'next/router';
 import Button from '@/components/common/button';
 import React from 'react';
+import '../styles/global.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {

@@ -23,8 +23,6 @@ export default function Race(){
     const [focused,setFocus] = useState(false);
     const [startRace,setStartRace] = useState(false);
     const [keyPressed,setKeyPressed] = useState("");
-    const [timeTaken, setTimeTaken] = useState<number>();
-    const [getTime, setGetTime] = useState<boolean>(false)
     useEffect(() => {
         
         toast('Make sure to click on the paragraph before writing and you will see the border changing meaning now you can Start!',
@@ -41,11 +39,10 @@ export default function Race(){
     // },[text])
     useEffect(() => {
         generateText().then(data => {        
-            setText(data.data)});  
+            setText(data.data.split("").slice(0,Math.floor(Math.random()*50)+100).join(""))});  
     },[show])
     const handleChange = (e) => {        
        if(e.target.value.length == text.length){
-        setGetTime(true);
          stopRace();
        }
        setInputValue(e.target.value);
@@ -62,7 +59,6 @@ export default function Race(){
           inputRef.current?.focus();
           setStartRace(true);
           setFocus(true); 
-          
     }
     
     const calculateWPM = () => {
@@ -70,16 +66,15 @@ export default function Race(){
         let wordsTyped = (written as unknown as string).split(" ").length;
         console.log(wordsTyped)
         console.log(timeTaken)
-        let wpm = (wordsTyped/timeTaken!)/5;
+        let wpm = wordsTyped/timeTaken!;
         setWpm(wpm);
     }
     const stopRace = (timeTaken?:number) => {
         inputRef.current!.blur();
         //TODO: calculate wpm and accuracy
         setShow(true);
-        setTimeTaken(timeTaken??60);
         // setStartRace(false);
-        // calculateWPM();
+        calculateWPM();
     }
     const restartRace = () => {
 
@@ -91,7 +86,7 @@ export default function Race(){
         onOutsideClick= {() => {
             setFocus(false);
         }}>
-        <div className="w-8/12  m-auto" >
+        <div className="w-8/12  m-auto noselect" >
        <p className={!focused ? 'text-center border w-full m-auto text-3xl':"text-center border w-full m-auto text-3xl border-2 border-blue-300"} onClick={focus}>
       {text.length == 0 ? 'Loading...':text.split('').map((t,i) => {
         if(i < written.length){
@@ -100,7 +95,7 @@ export default function Race(){
         return <span key={i}>{t}</span>
       })}
       </p>
-    <input ref={inputRef} onChange={handleChange} value={inputValue} className='border w-[46vw] rounded-md h-[6vh] p-1  m-2 shadow-md' autoFocus={true} placeholder="When the race starts , you should start typing the above text in here" type="text"  onKeyDown={keyPressHandler} />
+    <input ref={inputRef} onPaste={(e) => e.preventDefault()} onFocus={focus} onChange={handleChange}  value={inputValue} className='border w-[46vw] rounded-md h-[6vh] p-1  m-2 shadow-md' autoFocus={true} placeholder="When the race starts , you should start typing the above text in here" type="text"  onKeyDown={keyPressHandler} />
     </div>
         </OutsideClickHandler>
     <div className="w-8/12 m-auto">

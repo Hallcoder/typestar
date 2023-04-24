@@ -5,7 +5,7 @@ export default function Modal({accuracy,wpm}){
         <span className="w-6/12 text-2xl flex flex-col items-center m-auto">
             <h2>Race Completed !</h2>
             <img src="./check.png" alt="" />
-            <p><strong className={wpm > 30 ? highAccuracyClass:lowAccuracyClass}>{wpm}</strong> WPM</p>
+            <p><strong className={wpm > 30 ? highAccuracyClass:lowAccuracyClass}>{Math.floor(wpm)}</strong> WPM</p>
             <p><strong className={accuracy > 60 ? highAccuracyClass:lowAccuracyClass}>{accuracy}%</strong> accuracy</p>
         </span>
     </div>
